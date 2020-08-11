@@ -18,6 +18,12 @@ export default function App() {
     ])
   }
 
+  const removeGoalHandler = (goalId) => {
+    setCourseGoals((currentGoals) => {
+      return currentGoals.filter((item) => item.key === goalId)
+    })
+  }
+
   return (
     <View style={styles.screen}>
       <GoalInput onAddGoal={addGoalHandler} />
@@ -26,7 +32,7 @@ export default function App() {
         renderItem={(itemData) => (
           <GoalItem
             title={itemData.item.value}
-            onDelete={() => console.log('Works?')}
+            onDelete={(goalId) => removeGoalHandler(goalId)}
           />
         )}
       ></FlatList>
