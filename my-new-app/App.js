@@ -12,7 +12,7 @@ export default function App() {
     setCourseGoals((currentGoals) => [
       ...currentGoals,
       {
-        key: Math.random().toString(),
+        id: Math.random().toString(),
         value: goalTitle,
       },
     ])
@@ -20,7 +20,7 @@ export default function App() {
 
   const removeGoalHandler = (goalId) => {
     setCourseGoals((currentGoals) => {
-      return currentGoals.filter((item) => item.key === goalId)
+      return currentGoals.filter((goal) => goal.id !== goalId)
     })
   }
 
@@ -31,8 +31,9 @@ export default function App() {
         data={courseGoals}
         renderItem={(itemData) => (
           <GoalItem
+            id={itemData.item.id}
             title={itemData.item.value}
-            onDelete={(goalId) => removeGoalHandler(goalId)}
+            onDelete={removeGoalHandler}
           />
         )}
       ></FlatList>
